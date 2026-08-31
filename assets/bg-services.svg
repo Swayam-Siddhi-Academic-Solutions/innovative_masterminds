@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+<defs>
+  <linearGradient id="g1" x1="0" y1="0" x2="1600" y2="900">
+    <stop stop-color="#F8F8FF"/><stop offset="1" stop-color="#FFFFFF"/>
+  </linearGradient>
+</defs>
+<rect width="1600" height="900" fill="url(#g1)"/>
+<g opacity=".12">
+  <circle cx="240" cy="220" r="120" fill="#6747FF"/><circle cx="510" cy="230" r="120" fill="#29A7FF"/>
+  <circle cx="780" cy="220" r="120" fill="#FF6D5E"/><circle cx="1050" cy="230" r="120" fill="#FFD83D"/>
+  <circle cx="1320" cy="220" r="120" fill="#33D6C5"/>
+  <circle cx="380" cy="620" r="140" fill="#BDF83E"/><circle cx="820" cy="660" r="140" fill="#FF55B8"/>
+  <circle cx="1240" cy="620" r="140" fill="#6747FF"/>
+</g>
+<g opacity=".17" stroke="#17175F" stroke-width="10" stroke-linecap="round">
+  <path d="M210 220h60M240 190v60"/><path d="M480 220l52-52M480 168l52 52"/>
+  <path d="M750 188l60 64M810 188l-60 64"/><path d="M1022 188h56v56h-56z"/>
+  <path d="M1300 220c0-28 20-48 48-48 28 0 48 20 48 48s-20 48-48 48c-28 0-48-20-48-48Z"/>
+</g>
+</svg>
