@@ -29,58 +29,103 @@
 </div>
 </header>
 <main>
+<section class="section gallery-section section-bg" id="gallery">
+  <div class="container page-intro reveal">
+    <span class="section-kicker">GALLERY</span>
+    <h1>Photos, videos and learning moments.</h1>
+    <p>Public highlights from classes, institutional programs, robotics, aeromodelling, training sessions and student activities.</p>
+  </div>
 
+  <div class="container">
+    <div class="gallery-head reveal">
+      <div>
+        <span class="section-kicker">Cloud Gallery</span>
+        <h2>Moments from <span class="marker alt-marker">learning in action.</span></h2>
+        <p>Photos and videos uploaded by the administrator are stored in Supabase Storage and are visible to visitors across devices.</p>
+      </div>
 
+      <div class="gallery-admin-actions">
+        <button class="admin-login-btn" id="adminLoginBtn" type="button">Admin Login</button>
+        <button class="upload-open-btn is-hidden" id="cloudUploadBtn" type="button">＋ Upload Media</button>
+        <button class="admin-signout-btn is-hidden" id="adminSignOutBtn" type="button">Sign Out</button>
+      </div>
+    </div>
 
+    <div class="gallery-status" id="galleryStatus" role="status" aria-live="polite">
+      Loading gallery…
+    </div>
 
+    <div class="cloud-media-gallery" id="cloudMediaGallery"></div>
 
-<section class="section gallery-section section-bg" id="gallery"><div class="container page-intro reveal"><span class="section-kicker">GALLERY</span><h1>Photos, videos and learning moments.</h1><p>A dedicated space for classes, institutional programs, workshops, robotics, aeromodelling and student activities.</p></div>
-<div class="container">
-<div class="gallery-head reveal">
-<div>
-<span class="section-kicker">Photos &amp; Videos</span>
-<h2>Showcase class moments, workshop highlights and <span class="marker alt-marker">learning experiences.</span></h2>
-<p>Use this section to highlight classroom sessions, college engagements, robotics activities, aeromodelling workshops, student interactions and short explainer videos.</p>
-</div>
-<button class="upload-open-btn" id="openUploader">＋ Add Photos / Videos</button>
-</div>
-<div class="media-gallery" id="mediaGallery">
-<article class="media-placeholder reveal"><span>📘</span><strong>Academic Sessions</strong><small>Add classroom and tutoring moments</small></article>
-<article class="media-placeholder reveal delay-1"><span>🎓</span><strong>Institutional Programs</strong><small>Colleges, schools and workshops</small></article>
-<article class="media-placeholder reveal delay-2"><span>🤖</span><strong>Robotics Workshops</strong><small>Project-based STEM learning</small></article>
-<article class="media-placeholder reveal"><span>✈️</span><strong>Aeromodelling</strong><small>Hands-on model making and experiments</small></article>
-<article class="media-placeholder reveal delay-1"><span>🎥</span><strong>Training Videos</strong><small>Demo videos and short explainers</small></article>
-<article class="media-placeholder reveal delay-2"><span>⭐</span><strong>Student Moments</strong><small>Participation, feedback and milestones</small></article>
-</div>
-<div class="gallery-note reveal">
-<p><strong>Note:</strong> On the free GitHub Pages version, uploaded files are previewed instantly in the browser for convenience, but they are not permanently saved online until a cloud storage integration is added.</p>
-</div>
-</div>
+    <div class="empty-gallery is-hidden" id="emptyGallery">
+      <span>📷</span>
+      <h3>Gallery is ready.</h3>
+      <p>No public media has been uploaded yet. Once the administrator adds photos or videos, they will appear here automatically.</p>
+    </div>
+
+    <div class="setup-gallery is-hidden" id="setupGallery">
+      <span>⚙️</span>
+      <h3>One-time cloud setup required</h3>
+      <p>Add your Supabase Project URL and browser-safe publishable/anon key in <code>supabase-config.js</code>, then follow <code>SUPABASE_SETUP.md</code>.</p>
+    </div>
+  </div>
 </section>
-
 </main>
-<div aria-hidden="true" class="upload-panel" id="uploadPanel">
-<div class="upload-card">
-<button aria-label="Close" class="upload-close" id="closeUploader">×</button>
-<span class="section-kicker">Media Uploader</span>
-<h3>Add photos and videos</h3>
-<p class="upload-note">This uploader is configured for instant browser preview on the free static site. If you want permanent uploads for all visitors, we can connect this to Cloudinary or another storage service later.</p>
-<label class="drop-zone" id="dropZone">
-<input accept="image/*,video/*" hidden="" id="mediaInput" multiple="" type="file"/>
-<span class="drop-icon">⇧</span>
-<strong>Drag &amp; drop files here</strong>
-<small>or click to browse photos and videos</small>
-</label>
-<div class="upload-actions">
-<button id="clearMedia" type="button">Clear previews</button>
-<label class="browse-button" for="mediaInput">Choose Files</label>
+
+<!-- Admin login -->
+<div class="cloud-modal" id="adminLoginModal" aria-hidden="true">
+  <div class="cloud-modal-card compact-modal">
+    <button class="cloud-modal-close" data-close-modal="adminLoginModal" aria-label="Close">×</button>
+    <span class="section-kicker">Administrator</span>
+    <h3>Gallery Admin Login</h3>
+    <p>Only the authorised administrator can upload or delete gallery media.</p>
+
+    <form id="adminLoginForm">
+      <label class="field-label" for="adminEmail">Email</label>
+      <input class="cloud-input" id="adminEmail" type="email" autocomplete="username" value="im.abhilash.ssas@gmail.com" required>
+
+      <label class="field-label" for="adminPassword">Password</label>
+      <input class="cloud-input" id="adminPassword" type="password" autocomplete="current-password" required>
+
+      <button class="cloud-primary-btn" id="adminLoginSubmit" type="submit">Sign In</button>
+      <p class="form-message" id="adminLoginMessage"></p>
+    </form>
+  </div>
 </div>
-<div class="upload-preview" id="uploadPreview"></div>
+
+<!-- Permanent uploader -->
+<div class="cloud-modal" id="cloudUploadModal" aria-hidden="true">
+  <div class="cloud-modal-card">
+    <button class="cloud-modal-close" data-close-modal="cloudUploadModal" aria-label="Close">×</button>
+    <span class="section-kicker">Permanent Cloud Upload</span>
+    <h3>Add photos and videos</h3>
+    <p class="upload-note">Files uploaded here are stored in the public <strong>gallery</strong> bucket and remain visible on the website until you delete them.</p>
+
+    <label class="drop-zone cloud-drop-zone" id="cloudDropZone">
+      <input id="cloudMediaInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" multiple hidden>
+      <span class="drop-icon">⇧</span>
+      <strong>Drag & drop files here</strong>
+      <small>or click to choose photos/videos</small>
+    </label>
+
+    <div class="selected-files" id="selectedFiles"></div>
+
+    <div class="cloud-upload-actions">
+      <button class="cloud-secondary-btn" id="clearSelectedFiles" type="button">Clear</button>
+      <button class="cloud-primary-btn" id="startCloudUpload" type="button">Upload Permanently</button>
+    </div>
+
+    <div class="upload-progress-wrap is-hidden" id="uploadProgressWrap">
+      <div class="upload-progress"><span id="uploadProgressBar"></span></div>
+      <p id="uploadProgressText">Preparing upload…</p>
+    </div>
+  </div>
 </div>
-</div>
-<div aria-hidden="true" class="lightbox" id="lightbox">
-<button aria-label="Close" class="lightbox-close" id="lightboxClose">×</button>
-<div class="lightbox-content" id="lightboxContent"></div>
+
+<!-- Cloud lightbox -->
+<div class="cloud-lightbox" id="cloudLightbox" aria-hidden="true">
+  <button class="cloud-lightbox-close" id="cloudLightboxClose" aria-label="Close">×</button>
+  <div class="cloud-lightbox-content" id="cloudLightboxContent"></div>
 </div>
 <footer class="footer">
 <div class="container footer-inner">
@@ -95,5 +140,8 @@
 </div>
 </footer>
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="gallery-supabase.js"></script>
 </body>
 </html>
