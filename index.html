@@ -12,6 +12,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet"/>
+<link href="homepage-gallery.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="cursor-glow"></div>
@@ -25,7 +26,7 @@
 </span>
 </a>
 <button aria-expanded="false" aria-label="Open menu" class="menu-toggle">☰</button>
-<nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="services.html">Verticals</a><a href="reviews.html">Reviews</a><a href="tuition.html">Private Tuitions</a><a href="gallery.html">Gallery</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+<nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="services.html">Verticals</a><a href="reviews.html">Reviews</a><a href="tuition.html">Private Tuitions</a><a href="#gallery-highlights">Gallery</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
 </div>
 </header>
 <main>
@@ -92,6 +93,43 @@
 
 
 
+
+<section class="section home-gallery-section" id="gallery-highlights">
+  <div class="container">
+    <div class="home-gallery-heading reveal">
+      <div>
+        <span class="section-kicker">Gallery Highlights</span>
+        <h2>Learning in <span class="marker alt-marker">action.</span></h2>
+        <p>Recent photos and videos from classes, workshops, training sessions, robotics, aeromodelling, private tuition and student activities. New uploads to the Gallery appear here automatically.</p>
+      </div>
+      <a class="btn btn-gradient" href="gallery.html">View Full Gallery <span>→</span></a>
+    </div>
+    <div class="home-gallery-grid" id="homeGalleryGrid" aria-live="polite">
+      <div class="home-gallery-message">Loading gallery highlights…</div>
+    </div>
+  </div>
+</section>
+
+<section class="qr-section" id="scan">
+  <div class="container qr-wrap">
+    <div class="qr-copy reveal">
+      <span class="section-kicker light-kicker">Scan & Share</span>
+      <h2>Open Innovative Masterminds instantly.</h2>
+      <p>Scan this QR code from a phone to open the Innovative Masterminds website. You can also download the QR image and use it on visiting cards, brochures, posters, standees, presentations and social media.</p>
+      <div class="hero-actions">
+        <button class="btn btn-gradient" id="downloadQr" type="button">Download QR Code <span>↓</span></button>
+        <a class="btn btn-glass" href="https://swayam-siddhi-academic-solutions.github.io/innovative_masterminds/index.html" target="_blank" rel="noopener">Open Website ↗</a>
+      </div>
+      <span class="qr-url">swayam-siddhi-academic-solutions.github.io/innovative_masterminds/</span>
+    </div>
+    <div class="qr-card reveal delay-1">
+      <canvas id="siteQrCanvas" width="420" height="420" aria-label="QR code for Innovative Masterminds website"></canvas>
+      <strong>Innovative Masterminds</strong>
+      <small>Scan to visit the website</small>
+    </div>
+  </div>
+</section>
+
 <section class="section contact-section section-bg" id="contact">
 <div class="container contact-box reveal">
 <div>
@@ -144,5 +182,9 @@
 </div>
 </footer>
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script src="supabase-config.js"></script>
+<script src="home-gallery.js"></script>
 </body>
 </html>
