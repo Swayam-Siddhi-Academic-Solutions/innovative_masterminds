@@ -93,6 +93,16 @@
     });
   }
 
+  const downloadQr = document.getElementById('downloadQr');
+  downloadQr?.addEventListener('click', () => {
+    const canvas = document.getElementById('siteQrCanvas');
+    if (!canvas) return;
+    const link = document.createElement('a');
+    link.download = 'Innovative-Masterminds-QR.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
   loadHomeGallery();
   renderQr();
 })();
