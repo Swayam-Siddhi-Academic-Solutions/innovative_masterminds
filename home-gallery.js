@@ -40,7 +40,7 @@
       const { data, error } = await client.storage
         .from(bucket)
         .list('', {
-          limit: 6,
+          limit: 30,
           offset: 0,
           sortBy: { column: 'name', order: 'desc' }
         });
@@ -56,7 +56,15 @@
         return;
       }
 
-      grid.innerHTML = files.map(item => {
+      const heroBg = document.getElementById('heroGalleryBackground');
+      const backgroundPhoto = files.find(item => !isVideo(item.name, item.metadata));
+      if (heroBg && backgroundPhoto) {
+        const bgUrl = client.storage.from(bucket).getPublicUrl(backgroundPhoto.name).data.publicUrl;
+        heroBg.style.backgroundImage = `url("${bgUrl}")`;
+        heroBg.classList.add('is-loaded');
+      }
+
+      grid.innerHTML = files.slice(0, 6).map(item => {
         const url = client.storage.from(bucket).getPublicUrl(item.name).data.publicUrl;
         const video = isVideo(item.name, item.metadata);
         const title = escapeHtml(prettyName(item.name));
