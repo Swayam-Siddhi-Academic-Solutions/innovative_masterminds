@@ -79,30 +79,5 @@
     }
   }
 
-  function renderQr() {
-    const canvas = document.getElementById('siteQrCanvas');
-    if (!canvas || typeof QRious === 'undefined') return;
-
-    new QRious({
-      element: canvas,
-      value: 'https://swayam-siddhi-academic-solutions.github.io/innovative_masterminds/index.html',
-      size: 420,
-      level: 'H',
-      background: 'white',
-      foreground: 'black'
-    });
-  }
-
-  const downloadQr = document.getElementById('downloadQr');
-  downloadQr?.addEventListener('click', () => {
-    const canvas = document.getElementById('siteQrCanvas');
-    if (!canvas) return;
-    const link = document.createElement('a');
-    link.download = 'Innovative-Masterminds-QR.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  });
-
   loadHomeGallery();
-  renderQr();
 })();
