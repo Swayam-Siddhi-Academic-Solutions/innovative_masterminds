@@ -93,3 +93,119 @@
   .home-gallery-card img,
   .home-gallery-card video{min-height:230px}
 }
+
+/* =========================================================
+   HERO — GALLERY BACKGROUND + ONLINE TUITION EMPHASIS
+   ========================================================= */
+.hero-gallery-enhanced{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.hero-gallery-enhanced .hero-gallery-background{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity:0;
+  filter:saturate(.9) contrast(.95);
+  transform:scale(1.035);
+  transition:opacity 1s ease;
+}
+.hero-gallery-enhanced .hero-gallery-background.is-loaded{
+  opacity:.095;
+}
+.hero-gallery-enhanced .hero-gallery-wash{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.77) 48%,rgba(255,255,255,.60) 100%),
+    radial-gradient(circle at 15% 25%,rgba(198,248,61,.18),transparent 28%),
+    radial-gradient(circle at 76% 22%,rgba(103,71,255,.15),transparent 32%),
+    radial-gradient(circle at 64% 80%,rgba(41,167,255,.13),transparent 30%);
+}
+.hero-gallery-enhanced .hero-grid,
+.hero-gallery-enhanced .ticker{
+  position:relative;
+  z-index:1;
+}
+
+.online-tuition-focus{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  max-width:760px;
+  margin:20px 0 4px;
+  padding:14px 16px;
+  border:1px solid rgba(103,71,255,.16);
+  border-radius:17px;
+  background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(247,248,255,.76));
+  box-shadow:0 12px 30px rgba(23,23,95,.07);
+  backdrop-filter:blur(7px);
+  color:var(--ink);
+}
+.online-tuition-focus:hover{
+  transform:translateY(-3px);
+  border-color:rgba(103,71,255,.30);
+  box-shadow:0 18px 36px rgba(23,23,95,.11);
+}
+.online-tuition-icon{
+  flex:0 0 auto;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--lime),var(--yellow));
+  color:var(--navy);
+  font-size:25px;
+  font-weight:900;
+}
+.online-tuition-copy{
+  display:block;
+  min-width:0;
+}
+.online-tuition-copy strong{
+  display:block;
+  margin-bottom:3px;
+  color:var(--navy);
+  font-family:Manrope,sans-serif;
+  font-size:15px;
+}
+.online-tuition-copy small{
+  display:block;
+  color:#566174;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.5;
+}
+.online-tuition-copy em{
+  display:block;
+  margin-top:5px;
+  color:#70798a;
+  font-size:11px;
+  font-style:normal;
+  line-height:1.45;
+}
+.online-tuition-copy b{
+  color:var(--violet);
+}
+
+@media(max-width:700px){
+  .hero-gallery-enhanced .hero-gallery-background.is-loaded{opacity:.065}
+  .hero-gallery-enhanced .hero-gallery-wash{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.76)),
+      radial-gradient(circle at 70% 20%,rgba(103,71,255,.12),transparent 32%);
+  }
+  .online-tuition-focus{
+    margin-top:17px;
+    padding:13px;
+  }
+  .online-tuition-copy strong{font-size:14px}
+  .online-tuition-copy small{font-size:11px}
+}
