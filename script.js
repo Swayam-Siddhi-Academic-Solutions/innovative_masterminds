@@ -20,6 +20,14 @@ if (nav && !nav.querySelector('a[href="commercials.html"]')) {
   if (commercialsLink) commercialsLink.textContent = 'Learning Plans & Fees';
 }
 
+// On the cover page, replace the primary Explore Verticals CTA with Learning Plans & Fees.
+const coverPlansButton = document.querySelector('.hero-actions a.btn-gradient[href="services.html"]');
+if (coverPlansButton) {
+  coverPlansButton.href = 'commercials.html';
+  coverPlansButton.innerHTML = 'Learning Plans & Fees <span>→</span>';
+  coverPlansButton.setAttribute('aria-label', 'View Learning Plans and Fees');
+}
+
 menuBtn?.addEventListener('click', () => {
   nav.classList.toggle('open');
   menuBtn.setAttribute('aria-expanded', nav.classList.contains('open'));
