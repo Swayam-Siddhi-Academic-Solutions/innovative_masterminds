@@ -3,6 +3,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const menuBtn = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
+
+// Keep the Commercials tab next to Reviews across all website pages.
+if (nav && !nav.querySelector('a[href="commercials.html"]')) {
+  const reviewsLink = nav.querySelector('a[href="reviews.html"]');
+  const commercialsLink = document.createElement('a');
+  commercialsLink.href = 'commercials.html';
+  commercialsLink.textContent = 'Commercials';
+  if (reviewsLink) {
+    reviewsLink.insertAdjacentElement('afterend', commercialsLink);
+  } else {
+    nav.appendChild(commercialsLink);
+  }
+}
+
 menuBtn?.addEventListener('click', () => {
   nav.classList.toggle('open');
   menuBtn.setAttribute('aria-expanded', nav.classList.contains('open'));
