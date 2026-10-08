@@ -7,25 +7,54 @@ const nav = document.querySelector('.nav');
 // Keep the Learning Plans & Fees tab next to Reviews across all website pages.
 if (nav && !nav.querySelector('a[href="commercials.html"]')) {
   const reviewsLink = nav.querySelector('a[href="reviews.html"]');
-  const commercialsLink = document.createElement('a');
-  commercialsLink.href = 'commercials.html';
-  commercialsLink.textContent = 'Learning Plans & Fees';
+  const plansLink = document.createElement('a');
+  plansLink.href = 'commercials.html';
+  plansLink.textContent = 'Learning Plans & Fees';
   if (reviewsLink) {
-    reviewsLink.insertAdjacentElement('afterend', commercialsLink);
+    reviewsLink.insertAdjacentElement('afterend', plansLink);
   } else {
-    nav.appendChild(commercialsLink);
+    nav.appendChild(plansLink);
   }
 } else if (nav) {
-  const commercialsLink = nav.querySelector('a[href="commercials.html"]');
-  if (commercialsLink) commercialsLink.textContent = 'Learning Plans & Fees';
+  const plansLink = nav.querySelector('a[href="commercials.html"]');
+  if (plansLink) plansLink.textContent = 'Learning Plans & Fees';
 }
 
-// On the cover page, replace the primary Explore Verticals CTA with Learning Plans & Fees.
+// Add Free Assessment immediately after Learning Plans & Fees across the site.
+if (nav && !nav.querySelector('a[href="assessment.html"]')) {
+  const plansLink = nav.querySelector('a[href="commercials.html"]');
+  const assessmentLink = document.createElement('a');
+  assessmentLink.href = 'assessment.html';
+  assessmentLink.textContent = 'Free Assessment';
+  if (plansLink) {
+    plansLink.insertAdjacentElement('afterend', assessmentLink);
+  } else {
+    nav.appendChild(assessmentLink);
+  }
+}
+
+// On the cover page, replace Explore Verticals with Learning Plans & Fees.
 const coverPlansButton = document.querySelector('.hero-actions a.btn-gradient[href="services.html"]');
 if (coverPlansButton) {
   coverPlansButton.href = 'commercials.html';
   coverPlansButton.innerHTML = 'Learning Plans & Fees <span>→</span>';
   coverPlansButton.setAttribute('aria-label', 'View Learning Plans and Fees');
+}
+
+// Add a prominent Free Student Assessment button on the cover page.
+const heroActions = document.querySelector('.hero-actions');
+if (heroActions && !heroActions.querySelector('a[href="assessment.html"]')) {
+  const assessmentButton = document.createElement('a');
+  assessmentButton.className = 'btn btn-glass free-assessment-cta';
+  assessmentButton.href = 'assessment.html';
+  assessmentButton.textContent = 'Free Student Assessment';
+  assessmentButton.setAttribute('aria-label', 'Take the Free Student Assessment');
+  const whatsappButton = heroActions.querySelector('a[href^="https://wa.me/"]');
+  if (whatsappButton) {
+    heroActions.insertBefore(assessmentButton, whatsappButton);
+  } else {
+    heroActions.appendChild(assessmentButton);
+  }
 }
 
 menuBtn?.addEventListener('click', () => {
