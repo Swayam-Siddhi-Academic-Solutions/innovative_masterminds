@@ -20,17 +20,17 @@ if (nav && !nav.querySelector('a[href="commercials.html"]')) {
   if (plansLink) plansLink.textContent = 'Learning Plans & Fees';
 }
 
-// Add Free Assessment immediately after Learning Plans & Fees across the site.
-if (nav && !nav.querySelector('a[href="assessment.html"]')) {
-  const plansLink = nav.querySelector('a[href="commercials.html"]');
-  const assessmentLink = document.createElement('a');
-  assessmentLink.href = 'assessment.html';
-  assessmentLink.textContent = 'Free Assessment';
-  if (plansLink) {
-    plansLink.insertAdjacentElement('afterend', assessmentLink);
-  } else {
-    nav.appendChild(assessmentLink);
+// Keep Free Assessment immediately after Learning Plans & Fees and route it to the grade-wise hub.
+if (nav) {
+  let assessmentLink = nav.querySelector('a[href="free-assessment/"], a[href="assessment.html"]');
+  if (!assessmentLink) {
+    assessmentLink = document.createElement('a');
+    const plansLink = nav.querySelector('a[href="commercials.html"]');
+    if (plansLink) plansLink.insertAdjacentElement('afterend', assessmentLink);
+    else nav.appendChild(assessmentLink);
   }
+  assessmentLink.href = 'free-assessment/';
+  assessmentLink.textContent = 'Free Assessment';
 }
 
 // On the cover page, replace Explore Verticals with Learning Plans & Fees.
@@ -41,20 +41,58 @@ if (coverPlansButton) {
   coverPlansButton.setAttribute('aria-label', 'View Learning Plans and Fees');
 }
 
-// Add a prominent Free Student Assessment button on the cover page.
+// Add/update the prominent Free Student Assessment button on the cover page.
 const heroActions = document.querySelector('.hero-actions');
-if (heroActions && !heroActions.querySelector('a[href="assessment.html"]')) {
-  const assessmentButton = document.createElement('a');
-  assessmentButton.className = 'btn btn-glass free-assessment-cta';
-  assessmentButton.href = 'assessment.html';
-  assessmentButton.textContent = 'Free Student Assessment';
-  assessmentButton.setAttribute('aria-label', 'Take the Free Student Assessment');
-  const whatsappButton = heroActions.querySelector('a[href^="https://wa.me/"]');
-  if (whatsappButton) {
-    heroActions.insertBefore(assessmentButton, whatsappButton);
-  } else {
-    heroActions.appendChild(assessmentButton);
+if (heroActions) {
+  let assessmentButton = heroActions.querySelector('a[href="assessment.html"], a[href="free-assessment/"]');
+  if (!assessmentButton) {
+    assessmentButton = document.createElement('a');
+    assessmentButton.className = 'btn btn-glass free-assessment-cta';
+    const whatsappButton = heroActions.querySelector('a[href^="https://wa.me/"]');
+    if (whatsappButton) heroActions.insertBefore(assessmentButton, whatsappButton);
+    else heroActions.appendChild(assessmentButton);
   }
+  assessmentButton.href = 'free-assessment/';
+  assessmentButton.textContent = 'Free Student Assessment';
+  assessmentButton.setAttribute('aria-label', 'Choose a grade-wise Free Student Assessment');
+}
+
+// Load the assessment hub styling wherever the shared script runs.
+if (!document.querySelector('link[href="assessment-hub.css"]')) {
+  const assessmentStyles = document.createElement('link');
+  assessmentStyles.rel = 'stylesheet';
+  assessmentStyles.href = 'assessment-hub.css';
+  document.head.appendChild(assessmentStyles);
+}
+
+// Cover-page grade-wise assessment folders.
+if (document.querySelector('.home-gallery-section') && !document.querySelector('.free-assessment-cover')) {
+  const assessmentSection = document.createElement('section');
+  assessmentSection.className = 'free-assessment-cover';
+  assessmentSection.id = 'free-assessments';
+  assessmentSection.innerHTML = `
+    <div class="container">
+      <div class="assessment-cover-head reveal">
+        <div>
+          <span class="section-kicker">FREE STUDENT ASSESSMENTS</span>
+          <h2>Choose a grade-wise <span class="gradient-text">free assessment.</span></h2>
+          <p>Select the student’s grade or Aptitude assessment. Each option opens its own dedicated assessment folder. ಕನ್ನಡದಲ್ಲಿಯೂ ಲಭ್ಯ.</p>
+        </div>
+        <a class="btn btn-gradient assessment-cover-cta" href="free-assessment/">View All Assessments <span>→</span></a>
+      </div>
+      <div class="assessment-folder-grid reveal delay-1">
+        <a class="assessment-folder-card" href="free-assessment/grade-5/"><span class="assessment-folder-icon">📘</span><strong>Grade 5</strong><small>5ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-6/"><span class="assessment-folder-icon">📗</span><strong>Grade 6</strong><small>6ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-7/"><span class="assessment-folder-icon">📙</span><strong>Grade 7</strong><small>7ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-8/"><span class="assessment-folder-icon">📕</span><strong>Grade 8</strong><small>8ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-9/"><span class="assessment-folder-icon">📚</span><strong>Grade 9</strong><small>9ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-10/"><span class="assessment-folder-icon">🎯</span><strong>Grade 10</strong><small>10ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-12/"><span class="assessment-folder-icon">🎓</span><strong>Grade 12</strong><small>12ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card aptitude" href="free-assessment/aptitude/"><span class="assessment-folder-icon">∑</span><strong>Aptitude</strong><small>ಸಾಮರ್ಥ್ಯ ಪರೀಕ್ಷೆ</small><b>Start Free Assessment →</b></a>
+      </div>
+    </div>`;
+  const gallerySection = document.querySelector('.home-gallery-section');
+  gallerySection.parentNode.insertBefore(assessmentSection, gallerySection);
 }
 
 menuBtn?.addEventListener('click', () => {
