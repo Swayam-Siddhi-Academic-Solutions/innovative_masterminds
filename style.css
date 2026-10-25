@@ -642,3 +642,34 @@ a{text-decoration:none;transition:.25s ease}
   .site-header .nav{flex:1;min-width:0;flex-wrap:wrap;justify-content:flex-end;gap:10px 14px;padding:12px 0}
   .site-header .nav a{white-space:nowrap}
 }
+
+/* Homepage actions: two secondary links and a prominent reservation action. */
+.hero .hero-actions.hero-actions-booking{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  align-items:stretch;
+}
+.hero-actions-booking > .btn{
+  min-width:0;
+  min-height:52px;
+  padding:14px 18px;
+  line-height:1.4;
+  text-align:center;
+}
+.hero-actions-booking > .hero-reserve-cta{
+  grid-column:1 / -1;
+  min-height:64px;
+  padding:17px 20px;
+  font-size:16px;
+  box-shadow:0 14px 34px rgba(103,71,255,.3);
+}
+.hero-reserve-cta > span:first-child{min-width:0}
+.hero-reserve-cta > span:last-child{flex-shrink:0;font-size:22px}
+.hero-actions-booking > .btn:focus-visible{
+  outline:3px solid var(--navy);
+  outline-offset:4px;
+}
+@media(max-width:420px){
+  .hero-actions-booking > .hero-reserve-cta{font-size:15px;padding:16px}
+}

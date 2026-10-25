@@ -55,9 +55,9 @@ if (coverPlansButton) {
   coverPlansButton.setAttribute('aria-label', 'View Learning Plans and Fees');
 }
 
-// Add/update the prominent Free Student Assessment button on the cover page.
+// Keep legacy assessment actions only on pages without an explicit homepage action row.
 const heroActions = document.querySelector('.hero-actions');
-if (heroActions) {
+if (heroActions && !heroActions.classList.contains('hero-actions-booking')) {
   let assessmentButton = heroActions.querySelector('a[href="assessment.html"], a[href="free-assessment/"]');
   if (!assessmentButton) {
     assessmentButton = document.createElement('a');
