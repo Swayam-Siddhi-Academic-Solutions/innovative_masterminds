@@ -90,19 +90,19 @@ if (document.querySelector('.home-gallery-section') && !document.querySelector('
         <div>
           <span class="section-kicker">FREE STUDENT ASSESSMENTS</span>
           <h2>Choose a grade-wise <span class="gradient-text">free assessment.</span></h2>
-          <p>100 questions per section. Take 30 random questions, get instant scores and review explanations. English / ಕನ್ನಡ interface; questions in English.</p>
+          <p>100 questions per section. Take 30 random questions in English and see your score instantly. Get correct answers and improvement guidance by email for ₹99 per assessment, after payment verification.</p>
         </div>
         <a class="btn btn-gradient assessment-cover-cta" href="free-assessment/">View All Assessments <span>→</span></a>
       </div>
       <div class="assessment-folder-grid reveal delay-1">
-        <a class="assessment-folder-card" href="free-assessment/grade-5/"><span class="assessment-folder-icon">📘</span><strong>Grade 5</strong><small>5ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-6/"><span class="assessment-folder-icon">📗</span><strong>Grade 6</strong><small>6ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-7/"><span class="assessment-folder-icon">📙</span><strong>Grade 7</strong><small>7ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-8/"><span class="assessment-folder-icon">📕</span><strong>Grade 8</strong><small>8ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-9/"><span class="assessment-folder-icon">📚</span><strong>Grade 9</strong><small>9ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-10/"><span class="assessment-folder-icon">🎯</span><strong>Grade 10</strong><small>10ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card" href="free-assessment/grade-12/"><span class="assessment-folder-icon">🎓</span><strong>Grade 12</strong><small>12ನೇ ತರಗತಿ</small><b>Start Free Assessment →</b></a>
-        <a class="assessment-folder-card aptitude" href="free-assessment/aptitude/"><span class="assessment-folder-icon">∑</span><strong>Aptitude</strong><small>ಸಾಮರ್ಥ್ಯ ಪರೀಕ್ಷೆ</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-5/"><span class="assessment-folder-icon">📘</span><strong>Grade 5</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-6/"><span class="assessment-folder-icon">📗</span><strong>Grade 6</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-7/"><span class="assessment-folder-icon">📙</span><strong>Grade 7</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-8/"><span class="assessment-folder-icon">📕</span><strong>Grade 8</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-9/"><span class="assessment-folder-icon">📚</span><strong>Grade 9</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-10/"><span class="assessment-folder-icon">🎯</span><strong>Grade 10</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card" href="free-assessment/grade-12/"><span class="assessment-folder-icon">🎓</span><strong>Grade 12</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
+        <a class="assessment-folder-card aptitude" href="free-assessment/aptitude/"><span class="assessment-folder-icon">∑</span><strong>Aptitude</strong><small>100 questions · 30 per test</small><b>Start Free Assessment →</b></a>
       </div>
     </div>`;
   const gallerySection = document.querySelector('.home-gallery-section');
@@ -239,5 +239,6 @@ lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLight
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { setUploader(false); closeLightbox(); }
 });
+
 
 
