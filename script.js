@@ -33,6 +33,20 @@ if (nav) {
   assessmentLink.textContent = 'Free Assessment';
 }
 
+// Keep Math Topic Studio alongside Learning Plans & Fees on every shared navigation.
+if (nav) {
+  let topicLink = nav.querySelector('[data-math-topic-link], a[href="math-topic-studio.html"]');
+  if (!topicLink) {
+    topicLink = document.createElement('a');
+    topicLink.href = new URL('math-topic-studio.html', document.currentScript?.src || window.location.href).href;
+    topicLink.textContent = 'Book a Maths Topic';
+    topicLink.dataset.mathTopicLink = 'true';
+    nav.appendChild(topicLink);
+  }
+  const plans = nav.querySelector('a[href="commercials.html"]');
+  if (plans) plans.insertAdjacentElement('afterend', topicLink);
+}
+
 // On the cover page, replace Explore Verticals with Learning Plans & Fees.
 const coverPlansButton = document.querySelector('.hero-actions a.btn-gradient[href="services.html"]');
 if (coverPlansButton) {
@@ -232,3 +246,4 @@ lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLight
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { setUploader(false); closeLightbox(); }
 });
+

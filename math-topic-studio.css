@@ -1,0 +1,58 @@
+.math-studio-page{background:#f7f8ff}
+.studio-hero{padding:64px 0 34px;background:radial-gradient(ellipse at 90% 0,rgba(103,71,255,.12),transparent 55%),linear-gradient(180deg,#fff,#f7f8ff);border-bottom:1px solid #e5e7f2}
+.studio-hero h1{font-family:Manrope,Inter,Arial,sans-serif;font-size:clamp(38px,5.1vw,62px);letter-spacing:-.05em;line-height:1.07;margin:15px 0 18px;color:#17175f}
+.studio-hero>div>p{max-width:760px;color:#606b7e;font-size:17px;margin:0 0 18px}
+.studio-facts{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}
+.studio-facts>span{background:white;border:1px solid #dfe3f0;border-radius:999px;padding:7px 13px;color:#5a6478;font-size:12px}
+.studio-facts strong{color:#17175f;font-size:15px}
+.studio-hero .studio-steps{font-size:12px;font-weight:650;line-height:2;margin-bottom:0;max-width:none}
+.studio-steps span{color:#8368ed;padding:0 7px}
+.studio-content{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:25px;padding-top:32px;padding-bottom:70px;align-items:start}
+.studio-panel{background:#fff;border:1px solid #e0e5f0;border-radius:21px;padding:24px;box-shadow:0 8px 25px rgba(23,23,95,.035)}
+.studio-panel h2{font-family:Manrope,Inter,Arial,sans-serif;letter-spacing:-.025em;color:#17175f;font-size:23px;line-height:1.25;margin:0 0 22px}
+.studio-panel label{display:block;font-size:12px;font-weight:750;color:#46526a;margin:0 0 18px}
+.studio-panel select,.studio-panel input,.studio-panel textarea{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #d8dfec;border-radius:10px;background:#fff;font:inherit;font-weight:500;font-size:14px;color:#25324c;min-height:46px}
+.studio-panel input::placeholder,.studio-panel textarea::placeholder{color:#8b93a2;font-size:13px}
+.studio-panel :is(select,input,textarea):focus{outline:3px solid #eee8ff;border-color:#6747ff}
+.studio-panel select:disabled,.studio-panel input:disabled{background:#f4f5fa;color:#8b93a2}
+.filter-row{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+.studio-help{font-size:11px;color:#748097;line-height:1.7;margin:12px 0 0}
+.course-controls .studio-help{margin:0}
+.studio-topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:17px;max-height:670px;overflow-y:auto;padding:2px 6px 6px 2px;scrollbar-width:thin;scrollbar-color:#c4b9ef transparent}
+.studio-topic-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;justify-content:space-between;gap:7px;min-height:174px;border:1px solid #dfe4f0;background:white;border-radius:17px;padding:14px;cursor:pointer;transition:box-shadow .15s,border-color .15s,transform .15s;font-family:inherit;position:relative}
+.studio-topic-card:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(70,51,145,.08);border-color:#a69ad4}
+.studio-topic-card:focus-visible{outline:3px solid #c5bbf9;outline-offset:2px}
+.studio-topic-card[aria-pressed=true]{border:2px solid #7657e8;padding:13px;background:#f7f4ff;box-shadow:0 0 0 2px rgba(118,87,232,.05)}
+.studio-topic-card img{height:73px;width:100%;object-fit:contain;display:block;background:#fafaff;border-radius:10px}
+.studio-topic-card strong{font-size:13px;line-height:1.45;color:#23304c;font-weight:750}
+.studio-topic-card small{font-size:10px;color:#8991a3;line-height:1.5}
+.studio-topic-card[aria-pressed=true] strong{color:#6040c9}
+.studio-topic-grid .studio-empty{grid-column:1/-1;color:#788296;padding:25px 16px;background:#fff;border-radius:14px;border:1px dashed #d9dfed;font-size:13px}
+.catalogue-note{padding:0 5px;font-size:10px}
+.studio-sidebar{display:grid;gap:17px;position:sticky;top:104px}
+.studio-eyebrow{font-size:9px;font-weight:850;color:#8a76b5;letter-spacing:.12em}
+.selected-art{width:100%;height:95px;object-fit:contain;background:#fbfaff;border-radius:12px;margin:15px 0}
+.studio-lesson h2{margin:5px 0 20px;font-size:23px}
+.studio-price{display:flex;gap:12px;align-items:center;border-top:1px solid #edf0f6;padding-top:16px;margin-top:3px}
+.studio-price strong{font-size:32px;font-weight:850;letter-spacing:-.04em;color:#17175f}
+.studio-price span{font-size:11px;color:#7b8497;max-width:100px;line-height:1.5}
+.studio-lesson .studio-price+.studio-help{margin-top:0;font-size:10px}
+.studio-booking-status{background:#fff9ed;border:1px solid #f3e3c6;border-radius:12px;padding:13px;margin:18px 0 12px}
+.studio-booking-status strong{font-size:12px;color:#82601d}
+.studio-booking-status p{font-size:11px;color:#927545;margin:5px 0 0;line-height:1.7}
+.studio-book-button,.studio-contact-button{width:100%;border:0;border-radius:11px;font:inherit;font-size:12px;font-weight:750;text-align:center;min-height:45px;padding:12px;display:block}
+.studio-book-button:disabled{color:#8c92a2;background:#edf0f6;cursor:not-allowed}
+.studio-contact-button{background:#17175f;color:white;margin-top:10px;transition:background .2s}
+.studio-contact-button:hover{background:#423286;color:white}
+.studio-hours h3{font-size:14px;color:#283658;margin:0 0 13px}
+.studio-hours dl{margin:0}
+.studio-hours dl>div{margin:10px 0}
+.studio-hours dt{color:#768196;font-size:11px}
+.studio-hours dd{color:#32425f;font-size:12px;font-weight:700;margin:0}
+.studio-hours>a{display:block;font-size:11px;color:#6747ce;margin-top:12px;overflow-wrap:anywhere}
+.math-studio-page [hidden]{display:none!important}
+.math-studio-page .footer small{font-size:10px;color:#adb5d0}
+.math-studio-page .nav a[aria-current=page]{color:#6747ff}
+@media(max-width:1100px) and (min-width:801px){.studio-content{grid-template-columns:minmax(0,1fr) 310px;gap:18px}.studio-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.studio-panel{padding:20px}}
+@media(max-width:800px){.studio-content{grid-template-columns:1fr;gap:24px}.studio-sidebar{position:static;grid-template-columns:1fr 1fr;align-items:start}.studio-hero{padding-top:42px}.studio-topic-grid{max-height:530px}.studio-panel{padding:21px}}
+@media(max-width:550px){.studio-hero h1{font-size:40px}.studio-hero>div>p{font-size:14px}.studio-facts{gap:6px}.studio-facts>span{font-size:10px;padding:5px 9px}.studio-hero .studio-steps{font-size:10px}.studio-steps span{padding:0 3px}.studio-content{padding-top:22px;padding-bottom:40px}.filter-row{grid-template-columns:1fr;gap:0}.studio-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-height:470px}.studio-topic-card{min-height:162px;padding:12px}.studio-topic-card[aria-pressed=true]{padding:11px}.studio-topic-card strong{font-size:12px}.studio-sidebar{grid-template-columns:1fr}.studio-panel{border-radius:17px;padding:20px}.studio-facts strong{font-size:13px}}

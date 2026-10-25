@@ -634,3 +634,11 @@ a{text-decoration:none;transition:.25s ease}
   .cloud-upload-actions{flex-direction:column}
   .cloud-upload-actions button{width:100%}
 }
+
+
+/* Keep the expanded course navigation readable on desktop. */
+@media(min-width:1021px){
+  .site-header .brand{flex-shrink:0}
+  .site-header .nav{flex:1;min-width:0;flex-wrap:wrap;justify-content:flex-end;gap:10px 14px;padding:12px 0}
+  .site-header .nav a{white-space:nowrap}
+}
