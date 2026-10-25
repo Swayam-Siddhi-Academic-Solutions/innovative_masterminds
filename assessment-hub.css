@@ -51,3 +51,10 @@ html[data-assessment-lang="kn"] .lang-kn.inline{display:inline}
 .assessment-folder-card.aptitude.coming-soon-card b{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.26);color:#fff!important}
 .coming-soon-panel{text-align:center;padding:42px 28px}
 .coming-soon-panel .coming-soon-badge{display:inline-block;padding:9px 14px;border-radius:999px;background:#fff4d6;color:#8a5a00;font-weight:900;font-size:12px;border:1px solid #f1d99a;margin-bottom:14px}
+
+
+/* Live randomised assessments */
+.assessment-live-badge{display:inline-block;background:#e5f5d7;color:#2e651d;border-radius:99px;padding:7px 12px;font-size:11px;font-weight:800;margin-bottom:18px}
+.assessment-language-note{background:#f1f4ff;border-left:3px solid #6747ff;padding:13px 16px;border-radius:0 10px 10px 0;font-size:14px}
+.assessment-privacy-note{font-size:12px;margin-top:24px;max-width:900px}
+.grade-ready-actions .assessment-start-link{padding:16px 23px;box-shadow:0 8px 18px #6747ff22}

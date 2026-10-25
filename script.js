@@ -75,7 +75,7 @@ if (heroActions && !heroActions.classList.contains('hero-actions-booking')) {
 if (!document.querySelector('link[href="assessment-hub.css"]')) {
   const assessmentStyles = document.createElement('link');
   assessmentStyles.rel = 'stylesheet';
-  assessmentStyles.href = 'assessment-hub.css';
+  assessmentStyles.href = 'assessment-hub.css?v=20261025-assessments';
   document.head.appendChild(assessmentStyles);
 }
 
@@ -90,7 +90,7 @@ if (document.querySelector('.home-gallery-section') && !document.querySelector('
         <div>
           <span class="section-kicker">FREE STUDENT ASSESSMENTS</span>
           <h2>Choose a grade-wise <span class="gradient-text">free assessment.</span></h2>
-          <p>Grade-wise assessments are being prepared. They will be available here soon in English and Kannada. ಕನ್ನಡ ಆವೃತ್ತಿಯೂ ಶೀಘ್ರದಲ್ಲೇ ಲಭ್ಯವಾಗಲಿದೆ.</p>
+          <p>100 questions per section. Take 30 random questions, get instant scores and review explanations. English / ಕನ್ನಡ interface; questions in English.</p>
         </div>
         <a class="btn btn-gradient assessment-cover-cta" href="free-assessment/">View All Assessments <span>→</span></a>
       </div>
@@ -105,13 +105,6 @@ if (document.querySelector('.home-gallery-section') && !document.querySelector('
         <a class="assessment-folder-card aptitude" href="free-assessment/aptitude/"><span class="assessment-folder-icon">∑</span><strong>Aptitude</strong><small>ಸಾಮರ್ಥ್ಯ ಪರೀಕ್ಷೆ</small><b>Start Free Assessment →</b></a>
       </div>
     </div>`;
-  assessmentSection.querySelectorAll('.assessment-folder-card').forEach(card => {
-    card.removeAttribute('href');
-    card.setAttribute('aria-disabled', 'true');
-    card.classList.add('coming-soon-card');
-    const status = card.querySelector('b');
-    if (status) status.textContent = 'Coming Soon';
-  });
   const gallerySection = document.querySelector('.home-gallery-section');
   gallerySection.parentNode.insertBefore(assessmentSection, gallerySection);
 }
@@ -246,4 +239,5 @@ lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLight
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { setUploader(false); closeLightbox(); }
 });
+
 
