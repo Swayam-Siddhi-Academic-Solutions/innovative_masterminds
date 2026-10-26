@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="style.css?v=20261025-home-actions" rel="stylesheet"/>
 <link href="homepage-gallery.css" rel="stylesheet"/>
+<link href="homepage-features.css?v=20261026-learning" rel="stylesheet"/>
 </head>
 <body>
 <div class="cursor-glow"></div>
@@ -26,7 +27,7 @@
 </span>
 </a>
 <button aria-expanded="false" aria-label="Open menu" class="menu-toggle">☰</button>
-<nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="services.html">Verticals</a><a href="reviews.html">Reviews</a><a href="tuition.html">Private Tuitions</a><a href="#gallery-highlights">Gallery</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+<nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="services.html">Verticals</a><a href="reviews.html">Reviews</a><a class="home-assessment-nav" href="free-assessment/">Free Assessment</a><a href="tuition.html">Private Tuitions</a><a href="#gallery-highlights">Gallery</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
 </div>
 </header>
 <main>
@@ -47,10 +48,11 @@
     <em>For school students, college learners and aspirants seeking structured academic support. <b>Explore Online Tuitions →</b></em>
   </span>
 </a>
-<div class="hero-actions hero-actions-booking">
+<div class="hero-actions hero-actions-booking hero-priority-actions">
+<a class="btn hero-primary-cta hero-assessment-cta free-assessment-cta" href="free-assessment/"><span><small>FREE · 30 QUESTIONS</small><strong>Take a Free Assessment</strong></span><span aria-hidden="true">→</span></a>
+<a class="btn btn-gradient hero-primary-cta hero-reserve-cta math-topic-cta" href="math-topic-studio.html"><span><small>LIVE · PERSONALISED SUPPORT</small><strong>Reserve your online class today</strong></span><span aria-hidden="true">→</span></a>
 <a class="btn btn-glass" href="commercials.html">Learning Fees</a>
 <a class="btn btn-glass" href="reviews.html">Reviews</a>
-<a class="btn btn-gradient hero-reserve-cta math-topic-cta" href="math-topic-studio.html"><span>Reserve your online class today</span><span aria-hidden="true">→</span></a>
 </div>
 <div class="hero-rating">
 <span class="google-g">G</span>
@@ -81,6 +83,43 @@
 </div>
 </div>
 </section>
+
+<section class="section learning-pathways" id="learning-pathways" aria-labelledby="learning-pathways-title">
+  <div class="container">
+    <div class="learning-pathways-head">
+      <div>
+        <span class="section-kicker">EXPLORE · LEARN · GROW</span>
+        <h2 id="learning-pathways-title">Your next step starts with <span class="marker">curiosity.</span></h2>
+        <p>Discover where you stand, learn with guidance, and turn ideas into something real.</p>
+      </div>
+      <button class="learning-motion-toggle" id="learningMotionToggle" type="button" aria-controls="learningPathwayCards" aria-pressed="false" hidden>Pause animations</button>
+    </div>
+    <div class="learning-pathway-grid" id="learningPathwayCards">
+      <a class="learning-pathway-card pathway-assessment" href="free-assessment/">
+        <div class="learning-art" aria-hidden="true"><span class="learning-art-halo"></span><img class="learning-art-image" src="assets/learning-assessment-20261026.webp" alt="" width="640" height="640" loading="lazy" decoding="async"/><span class="learning-art-spark spark-one">✦</span><span class="learning-art-spark spark-two">✦</span></div>
+        <span class="learning-pathway-tag">FIND YOUR STARTING POINT</span>
+        <h3>Free assessments</h3>
+        <p>30 random questions. Your score, instantly. Choose your grade or try an aptitude test.</p>
+        <span class="learning-pathway-link">Start your free assessment <b aria-hidden="true">→</b></span>
+      </a>
+      <a class="learning-pathway-card pathway-classes" href="math-topic-studio.html">
+        <div class="learning-art" aria-hidden="true"><span class="learning-art-halo"></span><img class="learning-art-image" src="assets/learning-online-class-20261026.webp" alt="" width="640" height="640" loading="lazy" decoding="async"/><span class="learning-art-spark spark-one">✦</span><span class="learning-art-spark spark-two">✦</span></div>
+        <span class="learning-pathway-tag">LEARN WITH PERSONAL ATTENTION</span>
+        <h3>Live online classes</h3>
+        <p>Build concept clarity, ask questions and practise with guidance. Reserve a maths topic and a time.</p>
+        <span class="learning-pathway-link">Reserve your class <b aria-hidden="true">→</b></span>
+      </a>
+      <a class="learning-pathway-card pathway-stem" href="services.html">
+        <div class="learning-art" aria-hidden="true"><span class="learning-art-halo"></span><img class="learning-art-image" src="assets/learning-stem-20261026.webp" alt="" width="640" height="640" loading="lazy" decoding="async"/><span class="learning-art-spark spark-one">✦</span><span class="learning-art-spark spark-two">✦</span></div>
+        <span class="learning-pathway-tag">THINK. BUILD. DISCOVER.</span>
+        <h3>Hands-on STEM learning</h3>
+        <p>Explore robotics, aeromodelling and practical science through engaging learning experiences.</p>
+        <span class="learning-pathway-link">Explore our learning verticals <b aria-hidden="true">→</b></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section about-section section-bg" id="about">
 <div class="container split">
 <div class="reveal">
@@ -176,8 +215,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="home-gallery.js"></script>
+<script src="homepage-features.js?v=20261026-learning"></script>
 </body>
 </html>
-
-
-
