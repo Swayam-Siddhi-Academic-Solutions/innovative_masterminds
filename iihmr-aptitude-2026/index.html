@@ -49,7 +49,7 @@
     <h2>Candidate instructions</h2>
     <div class="stats"><div class="stat"><b>45</b> MCQs</div><div class="stat"><b>24</b> Quantitative</div><div class="stat"><b>21</b> Logical</div><div class="stat"><b>60</b> minutes</div></div>
     <p>Each question has four answer choices and one correct answer. Each correct response earns 1 mark, with no negative marking. The timer begins when you press <b>Start Assessment</b>. You can navigate between questions, save your answers automatically on this device and mark questions for review.</p>
-    <p>At submission, you will see your overall score and section-wise scores. <b>Save or share your result report with your IIHMR coordinator.</b> Answers and explanations are not displayed.</p>
+    <p>At submission, you will see <b>only your overall score</b>. Detailed individual performance reports are available only to the faculty coordinator. Answers and explanations are not displayed.</p>
     <div class="grid">
       <label class="field">Candidate full name *<input id="candidateName" maxlength="90" autocomplete="name" placeholder="Enter your full name" required></label>
       <label class="field">Student / enrolment ID *<input id="candidateId" maxlength="60" placeholder="Enter your ID" required></label>
@@ -57,7 +57,7 @@
     </div>
     <p id="introError" class="hidden" style="color:#a62738" role="alert"></p>
     <div class="actions" style="margin-top:18px"><button class="primary" id="startBtn">Start Assessment</button></div>
-    <p class="muted" style="font-size:.8rem">Results are not automatically sent to a server. Please keep the report displayed at the end.</p>
+    <p class="muted" style="font-size:.8rem">Your name, student ID, optional email and answer responses are sent to the faculty’s private results spreadsheet when you submit. Do not proceed if you do not wish to share this information.</p>
   </section>
   <section id="exam" class="hidden">
     <div class="card">
@@ -80,15 +80,13 @@
     </div>
   </section>
   <section id="results" class="card hidden">
-    <span class="pill">Assessment completed</span><h2 style="margin-top:13px">Your aptitude score report</h2>
+    <span class="pill">Assessment completed</span><h2 style="margin-top:13px">Your test score</h2>
     <p id="identityLine" class="muted"></p>
-    <div class="report"><div class="figure"><strong id="overallScore"></strong><small>Overall score / 45</small></div><div class="figure"><strong id="quantScore"></strong><small>Quantitative / 24</small></div><div class="figure"><strong id="logicalScore"></strong><small>Logical / 21</small></div></div>
-    <p id="resultNotes"></p>
-    <div class="note">This report is stored on your screen only. Use the buttons below to save or share a copy with your IIHMR coordinator; the website does not automatically collect scores.</div>
-    <div class="actions" style="margin-top:21px">
-      <button class="primary" id="printBtn">Print / Save PDF</button><button class="secondary" id="downloadBtn">Download score CSV</button><button class="outline" id="copyBtn">Copy score summary</button>
-    </div>
-    <p class="muted" style="font-size:.8rem">To attempt again, reopen the test link. This is a practice assessment and is not proctored.</p>
+    <div class="report" style="grid-template-columns:minmax(0,320px);justify-content:center"><div class="figure"><strong id="overallScore"></strong><small>Overall score out of 45</small></div></div>
+    <p id="resultNotes" class="muted" style="text-align:center"></p>
+    <p id="syncStatus" class="muted" style="font-size:.8rem;text-align:center" role="status"></p>
+    <div id="retryActions" class="actions hidden" style="justify-content:center"><button class="secondary" id="retryBtn">Retry sending result</button></div>
+    <p class="muted" style="font-size:.8rem;text-align:center">Detailed answers and reports are available only to your faculty coordinator.</p>
   </section>
 </main>
 <footer class="foot">IIHMR aptitude assessment series · Prepared by Innovative Masterminds · © 2026 Swayam Siddhi Academic Solutions</footer>
@@ -97,6 +95,8 @@
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
+// One-time setup: publish the Google Apps Script collector and insert its /exec URL here.
+const REPORT_ENDPOINT = "";
 const params=new URLSearchParams(location.search),set=Number(params.get("test"));
 if(![1,2,3].includes(set)){$("landing").classList.remove("hidden");return;}
 const questions=window.IIHMR_MAKE_TEST(set),key="iihmr-aptitude-2026-test-"+set,limit=60*60*1000;
@@ -106,6 +106,11 @@ $("intro").classList.remove("hidden");
 $("setLabel").textContent="TEST "+set;
 $("inTestSet").textContent="TEST "+set+" · 45 questions";
 document.title="IIHMR Aptitude Test "+set+" | 45 Questions";
+if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(REPORT_ENDPOINT)){
+  $("startBtn").disabled=true;
+  $("introError").textContent="Assessments are temporarily unavailable while private faculty report collection is being connected. Please contact your coordinator.";
+  $("introError").classList.remove("hidden");
+}
 function storageSave(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}}
 function storageRead(){try{return JSON.parse(localStorage.getItem(key)||"null");}catch(e){return null;}}
 function storageClear(){try{localStorage.removeItem(key);}catch(e){}}
@@ -171,29 +176,40 @@ $("submitBtn").addEventListener("click",()=>{
 function finish(automatic){
  if(complete)return;
  complete=true;if(interval)clearInterval(interval);
- let score=0,quant=0,logical=0,attempted=0;
- questions.forEach((q,i)=>{
-   if(state.answers[i]!==null)attempted++;
-   if(state.answers[i]===q.answer){score++;if(q.section==="Quantitative Aptitude")quant++;else logical++;}
- });
- report={test:set,name:state.name,studentId:state.studentId,email:state.email,score,quant,logical,attempted,submitted:new Date().toISOString(),mode:automatic?"Time elapsed":"Student submission"};
+ const score=questions.reduce((sum,q,i)=>sum+(state.answers[i]===q.answer?1:0),0);
+ report={test:set,name:state.name,studentId:state.studentId,score,attempted:state.answers.filter(a=>a!==null).length,completedAt:new Date().toISOString()};
+ const payload={schema:"iihmr-aptitude-2026",
+   submissionId:"iihmr-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,12),
+   test:set,name:state.name,studentId:state.studentId,email:state.email,
+   startedAt:new Date(state.startedAt).toISOString(),completedAt:report.completedAt,
+   answers:state.answers,questions:questions.map(q=>({section:q.section,q:q.q,options:q.options}))};
  storageClear();show("results");
- $("identityLine").textContent=state.name+" · "+state.studentId+" · Test "+set+" · "+new Date(report.submitted).toLocaleString();
- $("overallScore").textContent=score+"/45";$("quantScore").textContent=quant+"/24";$("logicalScore").textContent=logical+"/21";
- $("resultNotes").textContent="Percentage: "+(score/45*100).toFixed(1)+"%. Attempted: "+attempted+" of 45. Submission: "+report.mode+".";
+ $("identityLine").textContent=state.name+" · Test "+set;
+ $("overallScore").textContent=score+"/45";
+ $("resultNotes").textContent=(score/45*100).toFixed(1)+"%";
+ $("syncStatus").textContent="Submitting result to your faculty coordinator…";
  window.scrollTo(0,0);
+ transmitReport(payload);
 }
-function scoreSummary(){return "IIHMR Aptitude Test "+report.test+"\nName: "+report.name+"\nStudent ID: "+report.studentId+"\nSubmitted: "+report.submitted+"\nOverall: "+report.score+"/45\nQuantitative Aptitude: "+report.quant+"/24\nLogical Reasoning: "+report.logical+"/21\nAttempted: "+report.attempted+"/45";}
-$("printBtn").addEventListener("click",()=>window.print());
-$("copyBtn").addEventListener("click",async()=>{const text=scoreSummary();try{await navigator.clipboard.writeText(text);$("copyBtn").textContent="Copied!";}catch(e){prompt("Copy this score summary",text);}});
-$("downloadBtn").addEventListener("click",()=>{
- const headings=["Test","Candidate","Student ID","Email","Total Score /45","Quantitative /24","Logical /21","Attempted","Submitted (ISO)","Mode"];
- const rows=[report.test,report.name,report.studentId,report.email,report.score,report.quant,report.logical,report.attempted,report.submitted,report.mode];
- const quote=s=>'"'+String(s??"").replace(/"/g,'""')+'"';
- const csv="\uFEFF"+headings.map(quote).join(",")+"\r\n"+rows.map(quote).join(",")+"\r\n";
- const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob);
- const a=document.createElement("a");a.href=url;a.download="IIHMR_Test_"+set+"_"+report.studentId.replace(/[^A-Za-z0-9_-]/g,"_")+"_score.csv";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
-});
+let pendingPayload=null;
+async function transmitReport(payload){
+ pendingPayload=payload;
+ if(!REPORT_ENDPOINT){
+   $("syncStatus").textContent="Result collection is not configured. Contact the faculty coordinator.";
+   $("retryActions").classList.remove("hidden");return;
+ }
+ try{
+   // Google Apps Script Web App uses an opaque cross-origin response. Network
+   // dispatch can be checked, but the spreadsheet write is not acknowledged here.
+   await fetch(REPORT_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow",keepalive:true});
+   $("syncStatus").textContent="Result sent for faculty recording.";
+   $("retryActions").classList.add("hidden");
+ }catch(error){
+   $("syncStatus").textContent="Network issue: result may not have reached your coordinator. Please retry sending.";
+   $("retryActions").classList.remove("hidden");
+ }
+}
+$("retryBtn").addEventListener("click",()=>{if(pendingPayload)transmitReport(pendingPayload);});
 })();
 </script>
 </body>
