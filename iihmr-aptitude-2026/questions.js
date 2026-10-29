@@ -148,7 +148,7 @@ function makeTest(v){
   }
   {
     const base=[2,5,9,14,20,27].map(n=>L(n+v-1));
-    add("Logical Reasoning","Identify the next letter in the pattern: "+base.slice(0,5).join(", ")+", ?",base[5],[L(26+v),L(28+v),L(30+v)]);
+    add("Logical Reasoning","Identify the next letter in the pattern: "+base.slice(0,5).join(", ")+", ?",base[5],[L(27+v),L(28+v),L(29+v)]);
   }
   {
     const k=v+1,seq=[2,6,12,20,30,42].map(x=>x*k);
