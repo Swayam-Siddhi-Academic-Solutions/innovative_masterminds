@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132f58">
+  <meta name="robots" content="noindex, nofollow">
+  <title>IIHMR | Aptitude Assessment</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#19304c;background:#f4f7fb;--blue:#17477f;--navy:#132f58;--line:#dce5f0;--green:#12754b}
+    *{box-sizing:border-box}body{margin:0}button,input{font:inherit}
+    .top{background:linear-gradient(115deg,#102847,#1a568e);color:#fff;padding:22px max(20px,calc((100% - 990px)/2))}
+    .top small{letter-spacing:.11em;font-weight:700;color:#a8d8ff;font-size:.72rem}.top h1{font-size:clamp(1.25rem,3vw,1.8rem);margin:8px 0}.top p{margin:4px 0;color:#dbeafd;font-size:.9rem}
+    main{max-width:990px;margin:auto;padding:24px 16px 55px}
+    .card{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:0 8px 26px #1e40620a;padding:23px;margin-bottom:18px}
+    h2{margin:0 0 12px;font-size:1.35rem;color:var(--navy)}h3{font-size:1.05rem;margin:0 0 14px}p{line-height:1.55}
+    .muted{color:#64748b}.eyebrow{text-transform:uppercase;font-size:.74rem;font-weight:800;letter-spacing:.08em;color:#436e99}.pill{display:inline-flex;background:#e8f3ff;color:#17477f;padding:6px 12px;border-radius:99px;font-weight:800;font-size:.8rem}
+    .stats{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}.stat{background:#f0f6fc;border:1px solid #dfe9f7;padding:10px 14px;border-radius:9px;font-size:.85rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label.field{display:flex;flex-direction:column;gap:7px;font-size:.85rem;font-weight:700}label.field input{height:45px;border:1px solid #c8d5e3;border-radius:8px;padding:0 12px;outline-offset:2px}
+    button,.btnlink{border:0;cursor:pointer;border-radius:9px;padding:12px 17px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+    button.primary,.btnlink.primary{background:var(--blue);color:white}button.secondary,.btnlink.secondary{background:#e9f1fa;color:var(--navy)}button.outline{background:white;color:var(--blue);border:1px solid #b5c8de}button.danger{background:#b42336;color:white}button:disabled{opacity:.4;cursor:not-allowed}
+    button:focus-visible,input:focus-visible{outline:3px solid #91c9ff}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+    .clock{padding:8px 13px;background:#ebf3fc;border-radius:9px;font-variant-numeric:tabular-nums;font-weight:900;color:#17477f}.clock.warn{background:#fff0ea;color:#a32d14}
+    .progress{height:8px;border-radius:10px;overflow:hidden;background:#e0e9f5;margin:9px 0 18px}.fill{height:100%;background:var(--blue);width:0;transition:width .2s}
+    .question{font-size:1.17rem;font-weight:750;line-height:1.58;margin:22px 0;color:#142a48}
+    .options{display:grid;gap:11px}.option{display:flex;align-items:flex-start;gap:12px;border:1px solid #d5e0ec;border-radius:10px;padding:14px;cursor:pointer;font-size:.95rem;line-height:1.45}
+    .option input{margin-top:4px;accent-color:#17477f}.option:has(input:checked){border-color:#2a70b4;background:#eff7ff}
+    .navigation{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:23px}
+    .palette{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.pnum{min-width:36px;height:36px;padding:0;background:#edf2f8;border:1px solid #d5e2ef;border-radius:7px;color:#264260;font-size:.8rem}.pnum.answered{background:#d9f4e9;border-color:#a5d7bd;color:#106d49}.pnum.marked{box-shadow:inset 0 0 0 2px #e9a52b}.pnum.active{outline:3px solid #70a3dd}
+    .report{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.report .figure{background:#edf5fd;border-radius:12px;padding:19px;text-align:center}.figure strong{display:block;color:#183d69;font-size:1.75rem}.figure small{color:#52677d}
+    .note{border-left:3px solid #cc9b33;padding:9px 13px;background:#fffaf0;font-size:.85rem;color:#725b28}
+    .actions{display:flex;flex-wrap:wrap;gap:10px}.hidden{display:none!important}
+    .foot{text-align:center;color:#8192a5;font-size:.77rem;padding:0 18px 24px}
+    @media(max-width:630px){.grid{grid-template-columns:1fr}.report{grid-template-columns:1fr}.card{padding:17px}.question{font-size:1.04rem}.top{padding:19px 16px}.stat{flex:1}.navigation button{flex:1}}
+    @media print{.top{background:none;color:#132f58}.top p{color:#425466}main{padding:10px}.card{box-shadow:none}button,.navigation,.palette,.foot,.note{display:none!important}body{background:white}}
+  </style>
+</head>
+<body>
+<header class="top"><small>INNOVATIVE MASTERMINDS · SWAYAM SIDDHI ACADEMIC SOLUTIONS</small><h1>IIHMR | Medium-Level Aptitude Assessment</h1><p>Quantitative Aptitude &amp; Logical Reasoning</p></header>
+<main>
+  <section id="landing" class="card hidden">
+    <span class="eyebrow">Select an assessment</span><h2>IIHMR aptitude test series</h2>
+    <p>Three separate 45-question assessments with equivalent difficulty. Choose the test assigned by your faculty coordinator.</p>
+    <div class="actions"><a class="btnlink primary" href="?test=1">Open Test 1</a><a class="btnlink secondary" href="?test=2">Open Test 2</a><a class="btnlink secondary" href="?test=3">Open Test 3</a></div>
+  </section>
+  <section id="intro" class="card hidden">
+    <div class="toolbar"><span id="setLabel" class="pill"></span><span class="muted">Difficulty: Medium</span></div>
+    <h2>Candidate instructions</h2>
+    <div class="stats"><div class="stat"><b>45</b> MCQs</div><div class="stat"><b>24</b> Quantitative</div><div class="stat"><b>21</b> Logical</div><div class="stat"><b>60</b> minutes</div></div>
+    <p>Each question has four answer choices and one correct answer. Each correct response earns 1 mark, with no negative marking. The timer begins when you press <b>Start Assessment</b>. You can navigate between questions, save your answers automatically on this device and mark questions for review.</p>
+    <p>At submission, you will see your overall score and section-wise scores. <b>Save or share your result report with your IIHMR coordinator.</b> Answers and explanations are not displayed.</p>
+    <div class="grid">
+      <label class="field">Candidate full name *<input id="candidateName" maxlength="90" autocomplete="name" placeholder="Enter your full name" required></label>
+      <label class="field">Student / enrolment ID *<input id="candidateId" maxlength="60" placeholder="Enter your ID" required></label>
+      <label class="field">Email address (optional)<input id="candidateEmail" type="email" maxlength="120" autocomplete="email" placeholder="name@example.com"></label>
+    </div>
+    <p id="introError" class="hidden" style="color:#a62738" role="alert"></p>
+    <div class="actions" style="margin-top:18px"><button class="primary" id="startBtn">Start Assessment</button></div>
+    <p class="muted" style="font-size:.8rem">Results are not automatically sent to a server. Please keep the report displayed at the end.</p>
+  </section>
+  <section id="exam" class="hidden">
+    <div class="card">
+      <div class="toolbar"><span class="pill" id="inTestSet"></span><span class="clock" id="clock" role="timer">60:00</span></div>
+      <div class="toolbar"><span class="muted" id="progressLabel"></span><span class="muted" id="answeredLabel"></span></div>
+      <div class="progress"><div class="fill" id="fill"></div></div>
+      <div class="eyebrow" id="sectionLabel"></div>
+      <div class="question" id="prompt"></div>
+      <div class="options" id="options" role="radiogroup" aria-label="Choose an answer"></div>
+      <div class="navigation">
+        <button id="prevBtn" class="secondary">← Previous</button>
+        <button id="markBtn" class="outline">Mark for review</button>
+        <button id="nextBtn" class="primary">Next →</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Question navigator</h3><div class="muted" style="font-size:.82rem">Green = answered · Gold outline = marked for review</div>
+      <div class="palette" id="palette"></div>
+      <div class="toolbar" style="margin-top:22px"><span id="remainingText" class="muted"></span><button class="danger" id="submitBtn">Submit Assessment</button></div>
+    </div>
+  </section>
+  <section id="results" class="card hidden">
+    <span class="pill">Assessment completed</span><h2 style="margin-top:13px">Your aptitude score report</h2>
+    <p id="identityLine" class="muted"></p>
+    <div class="report"><div class="figure"><strong id="overallScore"></strong><small>Overall score / 45</small></div><div class="figure"><strong id="quantScore"></strong><small>Quantitative / 24</small></div><div class="figure"><strong id="logicalScore"></strong><small>Logical / 21</small></div></div>
+    <p id="resultNotes"></p>
+    <div class="note">This report is stored on your screen only. Use the buttons below to save or share a copy with your IIHMR coordinator; the website does not automatically collect scores.</div>
+    <div class="actions" style="margin-top:21px">
+      <button class="primary" id="printBtn">Print / Save PDF</button><button class="secondary" id="downloadBtn">Download score CSV</button><button class="outline" id="copyBtn">Copy score summary</button>
+    </div>
+    <p class="muted" style="font-size:.8rem">To attempt again, reopen the test link. This is a practice assessment and is not proctored.</p>
+  </section>
+</main>
+<footer class="foot">IIHMR aptitude assessment series · Prepared by Innovative Masterminds · © 2026 Swayam Siddhi Academic Solutions</footer>
+<script src="questions.js"></script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search),set=Number(params.get("test"));
+if(![1,2,3].includes(set)){$("landing").classList.remove("hidden");return;}
+const questions=window.IIHMR_MAKE_TEST(set),key="iihmr-aptitude-2026-test-"+set,limit=60*60*1000;
+const state={index:0,answers:Array(45).fill(null),marked:Array(45).fill(false),startedAt:null,name:"",studentId:"",email:""};
+let interval=null,complete=false,report=null;
+$("intro").classList.remove("hidden");
+$("setLabel").textContent="TEST "+set;
+$("inTestSet").textContent="TEST "+set+" · 45 questions";
+document.title="IIHMR Aptitude Test "+set+" | 45 Questions";
+function storageSave(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}}
+function storageRead(){try{return JSON.parse(localStorage.getItem(key)||"null");}catch(e){return null;}}
+function storageClear(){try{localStorage.removeItem(key);}catch(e){}}
+function show(id){["intro","exam","results"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
+const old=storageRead();
+if(old&&old.startedAt&&Array.isArray(old.answers)&&old.answers.length===45){
+ Object.assign(state,{index:Math.max(0,Math.min(44,Number(old.index)||0)),answers:old.answers,marked:Array.isArray(old.marked)&&old.marked.length===45?old.marked:Array(45).fill(false),startedAt:old.startedAt,name:old.name||"",studentId:old.studentId||"",email:old.email||""});
+ begin(true);
+}
+$("startBtn").addEventListener("click",()=>{
+ state.name=$("candidateName").value.trim();state.studentId=$("candidateId").value.trim();state.email=$("candidateEmail").value.trim();
+ if(!state.name||!state.studentId){$("introError").textContent="Please enter your name and student ID."; $("introError").classList.remove("hidden");return;}
+ if(state.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)){$("introError").textContent="Please enter a valid email address or leave it blank."; $("introError").classList.remove("hidden");return;}
+ state.startedAt=Date.now();storageSave();begin(false);
+});
+function begin(resume){
+ show("exam");draw();
+ if(interval)clearInterval(interval);
+ interval=setInterval(tick,500);tick();
+ if(resume&&Date.now()-state.startedAt>=limit)finish(true);
+}
+function tick(){
+ const remaining=Math.max(0,limit-(Date.now()-state.startedAt));
+ const sec=Math.ceil(remaining/1000),mm=Math.floor(sec/60),ss=sec%60;
+ $("clock").textContent=String(mm).padStart(2,"0")+":"+String(ss).padStart(2,"0");
+ $("clock").classList.toggle("warn",remaining<=5*60*1000);
+ if(!complete&&remaining===0)finish(true);
+}
+function draw(){
+ const n=state.index,q=questions[n];
+ $("progressLabel").textContent="Question "+(n+1)+" of 45";
+ const attempted=state.answers.filter(x=>x!==null).length;
+ $("answeredLabel").textContent=attempted+" answered";
+ $("fill").style.width=(attempted/45*100)+"%";
+ $("sectionLabel").textContent=q.section;
+ $("prompt").textContent=q.q;
+ $("options").replaceChildren();
+ q.options.forEach((o,i)=>{
+   const label=document.createElement("label");label.className="option";
+   const radio=document.createElement("input");radio.type="radio";radio.name="currentAnswer";radio.value=i;radio.checked=state.answers[n]===i;
+   radio.addEventListener("change",()=>{state.answers[n]=i;storageSave();draw();});
+   const span=document.createElement("span");span.textContent=String.fromCharCode(65+i)+". "+o;
+   label.append(radio,span);$("options").append(label);
+ });
+ $("markBtn").textContent=state.marked[n]?"Unmark review":"Mark for review";
+ $("prevBtn").disabled=n===0;$("nextBtn").textContent=n===44?"Review answers":"Next →";
+ const panel=$("palette");panel.replaceChildren();
+ for(let i=0;i<45;i++){
+   const btn=document.createElement("button");btn.className="pnum"+(state.answers[i]!==null?" answered":"")+(state.marked[i]?" marked":"")+(i===n?" active":"");
+   btn.textContent=i+1;btn.title="Question "+(i+1);btn.setAttribute("aria-label","Go to question "+(i+1));
+   btn.addEventListener("click",()=>{state.index=i;storageSave();draw();});
+   panel.append(btn);
+ }
+ $("remainingText").textContent=(45-attempted)+" unanswered · "+state.marked.filter(Boolean).length+" marked";
+}
+$("prevBtn").addEventListener("click",()=>{if(state.index>0){state.index--;storageSave();draw();}});
+$("nextBtn").addEventListener("click",()=>{if(state.index<44){state.index++;storageSave();draw();}else{$("palette").scrollIntoView({behavior:"smooth",block:"center"});}});
+$("markBtn").addEventListener("click",()=>{state.marked[state.index]=!state.marked[state.index];storageSave();draw();});
+$("submitBtn").addEventListener("click",()=>{
+ const missing=state.answers.filter(x=>x===null).length;
+ if(confirm("Submit Test "+set+"? "+(missing?missing+" questions are unanswered. ":"")+"You cannot change your answers after submission."))finish(false);
+});
+function finish(automatic){
+ if(complete)return;
+ complete=true;if(interval)clearInterval(interval);
+ let score=0,quant=0,logical=0,attempted=0;
+ questions.forEach((q,i)=>{
+   if(state.answers[i]!==null)attempted++;
+   if(state.answers[i]===q.answer){score++;if(q.section==="Quantitative Aptitude")quant++;else logical++;}
+ });
+ report={test:set,name:state.name,studentId:state.studentId,email:state.email,score,quant,logical,attempted,submitted:new Date().toISOString(),mode:automatic?"Time elapsed":"Student submission"};
+ storageClear();show("results");
+ $("identityLine").textContent=state.name+" · "+state.studentId+" · Test "+set+" · "+new Date(report.submitted).toLocaleString();
+ $("overallScore").textContent=score+"/45";$("quantScore").textContent=quant+"/24";$("logicalScore").textContent=logical+"/21";
+ $("resultNotes").textContent="Percentage: "+(score/45*100).toFixed(1)+"%. Attempted: "+attempted+" of 45. Submission: "+report.mode+".";
+ window.scrollTo(0,0);
+}
+function scoreSummary(){return "IIHMR Aptitude Test "+report.test+"\nName: "+report.name+"\nStudent ID: "+report.studentId+"\nSubmitted: "+report.submitted+"\nOverall: "+report.score+"/45\nQuantitative Aptitude: "+report.quant+"/24\nLogical Reasoning: "+report.logical+"/21\nAttempted: "+report.attempted+"/45";}
+$("printBtn").addEventListener("click",()=>window.print());
+$("copyBtn").addEventListener("click",async()=>{const text=scoreSummary();try{await navigator.clipboard.writeText(text);$("copyBtn").textContent="Copied!";}catch(e){prompt("Copy this score summary",text);}});
+$("downloadBtn").addEventListener("click",()=>{
+ const headings=["Test","Candidate","Student ID","Email","Total Score /45","Quantitative /24","Logical /21","Attempted","Submitted (ISO)","Mode"];
+ const rows=[report.test,report.name,report.studentId,report.email,report.score,report.quant,report.logical,report.attempted,report.submitted,report.mode];
+ const quote=s=>'"'+String(s??"").replace(/"/g,'""')+'"';
+ const csv="\uFEFF"+headings.map(quote).join(",")+"\r\n"+rows.map(quote).join(",")+"\r\n";
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download="IIHMR_Test_"+set+"_"+report.studentId.replace(/[^A-Za-z0-9_-]/g,"_")+"_score.csv";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+});
+})();
+</script>
+</body>
+</html>
