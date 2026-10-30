@@ -57,7 +57,7 @@
     </div>
     <p id="introError" class="hidden" style="color:#a62738" role="alert"></p>
     <div class="actions" style="margin-top:18px"><button class="primary" id="startBtn">Start Assessment</button></div>
-    <p class="muted" style="font-size:.8rem">This assessment currently runs on your device. Results are not automatically sent to your faculty coordinator. Please share a screenshot of your final score with your coordinator.</p>
+    <p class="muted" style="font-size:.8rem">Your name, student ID, answers and score are sent to your faculty coordinator’s private records when you submit. Keep this page open until saving is confirmed.</p>
   </section>
   <section id="exam" class="hidden">
     <div class="card">
@@ -86,7 +86,7 @@
     <p id="resultNotes" class="muted" style="text-align:center"></p>
     <p id="syncStatus" class="muted" style="font-size:.8rem;text-align:center" role="status"></p>
     <div id="retryActions" class="actions hidden" style="justify-content:center"><button class="secondary" id="retryBtn">Retry sending result</button></div>
-    <p class="muted" style="font-size:.8rem;text-align:center">Please share a screenshot of this score with your faculty coordinator.</p>
+    <p class="muted" style="font-size:.8rem;text-align:center">Your detailed responses are available only to your faculty coordinator.</p>
   </section>
 </main>
 <footer class="foot">IIHMR aptitude assessment series · Prepared by Innovative Masterminds · © 2026 Swayam Siddhi Academic Solutions</footer>
@@ -96,12 +96,13 @@
 "use strict";
 const $=id=>document.getElementById(id);
 // One-time setup: publish the Google Apps Script collector and insert its /exec URL here.
-const REPORT_ENDPOINT = "";
+const REPORT_ENDPOINT = "https://script.google.com/macros/s/AKfycbyxQl7xueBACGN3IYHYMu168ZiMKeA64rcZFhT6e0JYac70ooL_7Rn6_7t8AWuK-ZZR2w/exec";
 const params=new URLSearchParams(location.search),set=Number(params.get("test"));
 if(![1,2,3].includes(set)){$("landing").classList.remove("hidden");return;}
 const questions=window.IIHMR_MAKE_TEST(set),key="iihmr-aptitude-2026-test-"+set,limit=60*60*1000;
 const state={index:0,answers:Array(45).fill(null),marked:Array(45).fill(false),startedAt:null,name:"",studentId:"",email:""};
-let interval=null,complete=false,report=null;
+let interval=null,complete=false,report=null,pendingPayload=null;
+const pendingKey=key+"-pending";
 $("intro").classList.remove("hidden");
 $("setLabel").textContent="TEST "+set;
 $("inTestSet").textContent="TEST "+set+" · 45 questions";
@@ -110,7 +111,9 @@ function storageSave(){try{localStorage.setItem(key,JSON.stringify(state));}catc
 function storageRead(){try{return JSON.parse(localStorage.getItem(key)||"null");}catch(e){return null;}}
 function storageClear(){try{localStorage.removeItem(key);}catch(e){}}
 function show(id){["intro","exam","results"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
-const old=storageRead();
+let savedPending=null;
+try{savedPending=JSON.parse(localStorage.getItem(pendingKey)||"null");}catch(e){}
+const old=savedPending?null:storageRead();
 if(old&&old.startedAt&&Array.isArray(old.answers)&&old.answers.length===45){
  Object.assign(state,{index:Math.max(0,Math.min(44,Number(old.index)||0)),answers:old.answers,marked:Array.isArray(old.marked)&&old.marked.length===45?old.marked:Array(45).fill(false),startedAt:old.startedAt,name:old.name||"",studentId:old.studentId||"",email:old.email||""});
  begin(true);
@@ -178,6 +181,7 @@ function finish(automatic){
    test:set,name:state.name,studentId:state.studentId,email:state.email,
    startedAt:new Date(state.startedAt).toISOString(),completedAt:report.completedAt,
    answers:state.answers,questions:questions.map(q=>({section:q.section,q:q.q,options:q.options}))};
+ try{localStorage.setItem(pendingKey,JSON.stringify(payload));}catch(e){}
  storageClear();show("results");
  $("identityLine").textContent=state.name+" · Test "+set;
  $("overallScore").textContent=score+"/45";
@@ -186,7 +190,7 @@ function finish(automatic){
  window.scrollTo(0,0);
  transmitReport(payload);
 }
-let pendingPayload=null;
+
 async function transmitReport(payload){
  pendingPayload=payload;
  if(!REPORT_ENDPOINT){
@@ -194,15 +198,24 @@ async function transmitReport(payload){
    $("retryActions").classList.add("hidden");return;
  }
  try{
-   // Google Apps Script Web App uses an opaque cross-origin response. Network
-   // dispatch can be checked, but the spreadsheet write is not acknowledged here.
-   await fetch(REPORT_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow",keepalive:true});
-   $("syncStatus").textContent="Result sent for faculty recording.";
+   const response=await fetch(REPORT_ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow",signal:AbortSignal.timeout(45000)});
+   const receipt=await response.json();
+   if(!receipt.ok||receipt.submissionId!==payload.submissionId)throw new Error("Save not confirmed");
+   try{localStorage.removeItem(pendingKey);}catch(e){}
+   $("syncStatus").textContent="Your responses and score have been saved successfully.";
+   pendingPayload=null;
    $("retryActions").classList.add("hidden");
  }catch(error){
    $("syncStatus").textContent="Network issue: result may not have reached your coordinator. Please retry sending.";
    $("retryActions").classList.remove("hidden");
  }
+}
+if(savedPending){
+ complete=true;show("results");
+ $("identityLine").textContent=savedPending.name+" · Test "+set;
+ $("overallScore").textContent=questions.reduce((n,q,i)=>n+(savedPending.answers[i]===q.answer?1:0),0)+"/45";
+ $("syncStatus").textContent="Retrying submission…";
+ transmitReport(savedPending);
 }
 $("retryBtn").addEventListener("click",()=>{if(pendingPayload)transmitReport(pendingPayload);});
 })();
