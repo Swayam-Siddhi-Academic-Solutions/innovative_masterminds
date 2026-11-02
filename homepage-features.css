@@ -78,3 +78,8 @@
   .learning-pathway-card,.hero-primary-cta{transition:none}
   .learning-pathway-card:hover,.hero-assessment-cta:hover{transform:none}
 }
+
+
+/* Class 10 paper shop entry; existing assessment and reservation actions retained. */
+.hero-priority-actions > .hero-paper-cta{grid-column:1/-1;min-height:76px;display:flex;justify-content:space-between;text-align:left;padding:15px 20px;border:1px solid #d9ccf3;background:linear-gradient(110deg,#f1eaff,#eef8ff);color:var(--navy)}
+.hero-paper-cta strong,.hero-paper-cta small{display:block}.hero-paper-cta strong{font-size:15px}.hero-paper-cta small{font-size:9px;letter-spacing:.08em;margin-bottom:4px}.hero-paper-cta>span:last-child{font-size:24px}
