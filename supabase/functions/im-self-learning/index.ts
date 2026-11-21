@@ -76,6 +76,12 @@ async function handle(request: Request) {
     if (!body || typeof body!=='object' || Array.isArray(body)) throw new RequestError('Invalid request.');
     const action=field(body.action,22);
     if (action==='catalog') return send(await rpc('im_sl_catalog',{}));
+    if (action==='staff_data') {
+      const id=await owner(request);
+      const page=body.page??0;
+      if (!Number.isInteger(page)||page<0||page>10000) throw new RequestError('Invalid page.');
+      return send(await rpc('im_sl_review_data',{p_owner:id,p_view:field(body.view,20),p_search:field(body.search,150),p_page:page,p_chapter:field(body.chapter,45)}));
+    }
     if (staffActions.has(action)) {
       const id=await owner(request);
       const data: Record<string,unknown>={};

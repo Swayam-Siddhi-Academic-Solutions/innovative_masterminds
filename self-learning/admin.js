@@ -4,7 +4,7 @@
   const el=id=>document.getElementById(id);
   let token='',rows=[],item=null,action='',busy=false;
   const labels={awaiting_payment:'Awaiting payment',in_review:'Under review',needs_reference:'Correction requested',approved:'Active',expired:'Expired'};
-  function out(){token='';rows=[];item=null;el('rows').replaceChildren();el('count').textContent='';el('queue').hidden=true;el('login-panel').hidden=false;el('login').reset();}
+  function out(){token='';el('library').hidden=true;el('results').replaceChildren();el('reading').replaceChildren();el('found').textContent='';el('browse').reset();page=0;rows=[];item=null;el('rows').replaceChildren();el('count').textContent='';el('queue').hidden=true;el('login-panel').hidden=false;el('login').reset();}
   async function run(fn){if(busy)return;busy=true;showNotice('');try{await fn();}catch(error){if(/Owner access is required|Sign in to the owner desk/.test(error.message))out();showNotice(error.message,true);}finally{busy=false;}}
   function render(){
     const total=Number(rows[0]?.matches||0);el('count').textContent=total===0?'No matching passes.':total>rows.length?'Showing '+rows.length+' of '+total+' passes. Search by email to narrow the results.':total+' matching pass'+(total===1?'':'es')+'.';
@@ -16,11 +16,31 @@
       '<button type="button" data-i="'+i+'" data-action="rotate">Replace lost learning key</button></div></article>').join('');
   }
   async function load(){rows=await call('staff_list',{email:el('find').elements.email.value.trim()},token);render();}
+  let page=0;
+  async function browse(next){
+    const session=token, form=el('browse').elements;
+    const data=await call('staff_data',{view:form.view.value,search:form.term.value.trim(),page:next},session);
+    if(!token||token!==session)return;
+    page=next;el('reading').replaceChildren();
+    el('found').textContent=data.total?data.total+' matches · Page '+(page+1)+' of '+Math.ceil(data.total/20):'No matching records.';
+    el('prev-data').disabled=page===0;el('next-data').disabled=(page+1)*20>=data.total;
+    el('results').innerHTML=data.rows.map(row=>'<article class="card review-item">'+Object.entries(row.fields).map(([k,v])=>'<div><strong>'+e(k)+'</strong> '+e(v??'—')+'</div>').join('')+(row.chapter?'<button type="button" data-read="'+e(row.chapter)+'">Read chapter</button>':'')+'</article>').join('');
+  }
+  el('browse').addEventListener('submit',ev=>{ev.preventDefault();run(()=>browse(0));});
+  el('browse').elements.view.addEventListener('change',()=>{el('browse').elements.term.value='';run(()=>browse(0));});
+  el('prev-data').onclick=()=>run(()=>browse(page-1));el('next-data').onclick=()=>run(()=>browse(page+1));
+  el('results').onclick=ev=>{const b=ev.target.closest('[data-read]');if(!b)return;run(async()=>{
+    const session=token, data=await call('staff_data',{view:'chapter',chapter:b.dataset.read},session);
+    if(!token||token!==session)return;
+    const reader=el('reading'), labels={teach:'Explanation',example:'Worked example',steps:'Steps',question:'Practice question',answer:'Answer',why:'Reasoning',tip:'Learning tip'};
+    reader.innerHTML='<h3 tabindex="-1">'+e(data.title)+'</h3><p>'+e(data.board)+' · '+e(data.grade)+'</p>'+data.lessons.map(l=>'<details><summary>'+e(l.title)+'</summary>'+Object.entries(labels).map(([k,label])=>'<h4>'+e(label)+'</h4><p>'+e(l.body[k])+'</p>').join('')+'</details>').join('')+'<h4>Chapter challenge</h4><p>'+e(data.challenge.question)+'</p><p>'+e(data.challenge.solution)+'</p>';
+    reader.querySelector('h3').focus();
+  });};
   el('login').addEventListener('submit',event=>{event.preventDefault();run(async()=>{
     const fields=Object.fromEntries(new FormData(event.target));
     const r=await fetch(config.url+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:config.publishableKey,'Content-Type':'application/json'},body:JSON.stringify(fields),cache:'no-store'});
     const result=await r.json().catch(()=>({}));if(!r.ok||!result.access_token)throw new Error('Owner sign-in failed. Check the email and password.');
-    token=result.access_token;await load();el('login-panel').hidden=true;el('login').reset();el('queue').hidden=false;});});
+    token=result.access_token;await load();el('login-panel').hidden=true;el('login').reset();el('queue').hidden=false;el('library').hidden=false;await browse(0);});});
   el('logout').addEventListener('click',()=>{out();showNotice('Signed out.');});
   el('find').addEventListener('submit',event=>{event.preventDefault();run(load);});
   el('pending').addEventListener('click',()=>{el('find').reset();run(load);});
