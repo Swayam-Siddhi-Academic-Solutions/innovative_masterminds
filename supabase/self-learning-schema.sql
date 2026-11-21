@@ -91,7 +91,7 @@ begin
   -- Serializes checkout retries, renewals, chapter picks and progress for a single learner.
   select * into learner from public.im_sl_learners where key_hash=p_hash and email=p_email for update;
   if not found then raise exception 'The email and learning key do not match.'; end if;
-  select * into pass from public.im_sl_passes where learner_id=learner.id order by created_at desc,id limit 1 for update;
+  select * into pass from public.im_sl_passes where learner_id=learner.id order by created_at desc,ends_at desc nulls first,id limit 1 for update;
   if (pass.id is null and p_action='register') or (p_action='renew' and pass.ends_at<=now()) then
     if not ready then raise exception 'New passes are currently paused.'; end if;
     insert into public.im_sl_passes(learner_id) values(learner.id) returning * into pass;
