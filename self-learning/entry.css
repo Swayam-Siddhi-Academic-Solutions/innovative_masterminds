@@ -1,0 +1,13 @@
+/* Fourth homepage route and third fee column use the existing Midnight Lab cards. */
+.midnight-home .night-route-grid.with-self-learning{grid-template-columns:repeat(4,minmax(0,1fr))}
+.midnight-home .with-self-learning .night-route{gap:.65rem;padding:1rem}
+.midnight-home .with-self-learning .night-route img{width:clamp(2.4rem,3.8vw,3.5rem);height:auto}
+.midnight-home .with-self-learning .night-route small{font-size:.875rem;line-height:1.35;display:block}
+.midnight-home .with-self-learning .night-route .tiny-tag{font-size:.78rem;line-height:1.2}
+.midnight-home .with-self-learning .night-route.sl-route>span:last-child{margin:0;color:inherit}
+.page-commercials .self-learning-plan{border-top:3px solid #d5f76c}
+.page-commercials .self-learning-plan .plan-cta{display:inline-flex;font-size:1rem}
+@media(min-width:75rem){.page-commercials .plan-columns.with-self-learning{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(14rem,.58fr)}}
+@media(min-width:56rem) and (max-width:74.99rem){.page-commercials .self-learning-plan{grid-column:1/-1}}
+@media(max-width:68rem){.midnight-home .night-route-grid.with-self-learning{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:40rem){.midnight-home .night-route-grid.with-self-learning{grid-template-columns:1fr}.page-commercials .self-learning-plan{order:-1}}

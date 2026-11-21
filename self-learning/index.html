@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2c"><meta name="referrer" content="strict-origin">
+  <meta name="description" content="Choose up to 10 whole maths chapters and study at your own pace for 30 days with Innovative Masterminds.">
+  <title>Self Learning | Innovative Masterminds</title>
+  <link rel="icon" href="../assets/favicon.png"><link rel="stylesheet" href="learning.css">
+  <script defer src="../supabase-config.js"></script><script defer src="../question-papers/paper-config.js"></script>
+  <script defer src="common.js"></script><script defer src="learning.js"></script>
+</head>
+<body>
+<header class="mast"><div class="wrap mast-in"><a class="brand" href="../"><img src="../assets/logo.png" alt=""><span>Innovative Masterminds</span></a><nav aria-label="Main"><a href="#catalogue">Browse chapters</a><a href="#pass">My pass</a></nav></div></header>
+<main class="wrap">
+  <section class="hero"><div><p class="overline">SELF LEARNING</p><h1>Your chapters.<br><em>Your pace.</em></h1><p class="lead">Choose up to 10 whole maths chapters. Study each lesson, work through examples and check your understanding whenever it suits you.</p><div class="actions"><a class="btn main" href="#pass">Get or open my pass</a><a class="btn" href="#catalogue">Explore chapters</a></div></div>
+    <aside class="pricebox"><div class="price">₹599</div><strong>30 days of access</strong><p>Your time starts when we verify your payment. Choose chapters as you go and revisit them throughout your pass. Renew by UPI when you want another 30 days.</p></aside>
+  </section>
+  <div id="notice" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="surface">Enable JavaScript to browse chapters or open your learning pass.</p></noscript>
+  <section id="pass" class="block" aria-labelledby="pass-heading"><div class="sect-head"><div><p class="overline">STUDENT DESK</p><h2 id="pass-heading" tabindex="-1">My learning pass</h2></div></div>
+    <div id="account"></div>
+  </section>
+  <section id="reader" class="block" aria-labelledby="reader-title" hidden><div id="reader-body"></div></section>
+  <section id="catalogue" class="block" aria-labelledby="catalogue-title"><div class="sect-head"><div><p class="overline">CHAPTER LIBRARY</p><h2 id="catalogue-title" tabindex="-1">Find a chapter</h2></div><span id="library-size" class="muted"></span></div>
+    <div class="surface"><div class="filters"><label>Curriculum or track<select id="board" disabled><option>Loading curricula…</option></select></label><label>Class or level<select id="grade" disabled><option>Choose a curriculum</option></select></label><label>Find in this class<input id="search" type="search" placeholder="Chapter or lesson name"></label></div><p id="cat-status" role="status">Loading chapter library…</p><div id="chapter-list" class="catalogue-grid"></div></div>
+  </section>
+</main>
+<footer class="wrap foot"><a href="../">Innovative Masterminds home</a><a href="../commercials.html">Learning Fees</a><a href="admin.html">Owner review desk</a></footer>
+<dialog id="pick-dialog" aria-labelledby="pick-title"><h2 id="pick-title">Choose this chapter?</h2><p id="pick-copy"></p><div class="actions"><button type="button" id="pick-confirm" class="main">Use one chapter choice</button><button type="button" id="pick-cancel">Keep browsing</button></div></dialog>
+</body></html>

@@ -1,2 +1,5 @@
 [functions.im-paper-shop]
 verify_jwt = false
+
+[functions.im-self-learning]
+verify_jwt = false
